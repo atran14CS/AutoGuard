@@ -33,7 +33,65 @@ export const addStolenCar = async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 }
-
 export const getStolenCars = async (req, res) => {
-    
+    try {
+        let stolenCars = await StolenCar.find();
+        res.status(200).json(stolenCars);
+    } catch (error) {
+        console.log("Error occurred while trying to get stolen cars");
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
+}
+export const getStolenCarByLicensePlate = async (req, res) => {
+let licensePlate = req.params.licensePlate;
+    try {
+        let stolenCar = await StolenCar.findOne({licensePlate});
+        if(stolenCar) {
+            console.log(`License Plate:${licensePlate} found ${stolenCar.make} ${stolenCar.model} ${stolenCar.year}`);
+            res.status(200).json(stolenCar);
+        } else {
+            res.status(404).send("Car not found");
+        }
+    } catch (error) {
+        console.log('Error occurred while trying to get stolen car');
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
+}
+export const getComments = async (req, res) => {
+    let licensePlate = req.params.licensePlate;
+    try {
+        let comments = await Comment.findOne({licensePlate});
+        if(comments) {
+            console.log("comments for car exisist");
+            res.status(200).json(comments);
+        } else {
+            res.status(404).send("Comments not found");
+        }
+    } catch (error) {
+        console.log('Error occurred while trying to get comments');
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
+}
+export const addComment = async (req, res) => {
+    let { licensePlate, username, message } = req.body;
+    try {
+        let existingCar = await Comment.findOne({ licensePlate });
+        if (!existingCar) {
+            existingCar = new Comment({
+                licensePlate,
+                comments: [{ username, message, date: new Date() }]
+            });
+        } else {
+            existingCar.comments.push({ username, message, date: new Date() });
+        }
+        await existingCar.save();
+        console.log("Updated Comments Array:", existingCar.comments);
+        res.status(201).json({ message: "Comment added", comments: existingCar.comments });
+    } catch (error) {
+        console.error('Error occurred while trying to add comment', error);
+        res.status(500).send("Internal Server Error");
+    }
 }
