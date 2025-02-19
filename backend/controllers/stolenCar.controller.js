@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import StolenCar from "../models/stolenCar.model.js";
-import Comment from "../models/comment.model.js";
+import StolenCar from "../models/stolenCar.js";
+import Comment from "../models/comment.js";
 
 
 export const addStolenCar = async (req, res) => {
