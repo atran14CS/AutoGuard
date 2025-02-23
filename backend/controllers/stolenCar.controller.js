@@ -33,16 +33,22 @@ export const addStolenCar = async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 }
+
 export const getStolenCars = async (req, res) => {
     try {
-        let stolenCars = await StolenCar.find();
+        const offset = parseInt(req.query.offset) || 0;
+        const limit = parseInt(req.query.limit) || 10;
+        const stolenCars = await StolenCar.find()
+            .skip(offset)
+            .limit(limit);
         res.status(200).json(stolenCars);
     } catch (error) {
         console.log("Error occurred while trying to get stolen cars");
         console.error(error);
         res.status(500).send("Internal Server Error");
     }
-}
+};
+
 export const getStolenCarByLicensePlate = async (req, res) => {
 let licensePlate = req.params.licensePlate;
     try {
@@ -59,6 +65,7 @@ let licensePlate = req.params.licensePlate;
         res.status(500).send("Internal Server Error");
     }
 }
+
 export const getComments = async (req, res) => {
     let licensePlate = req.params.licensePlate;
     try {
@@ -75,6 +82,7 @@ export const getComments = async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 }
+
 export const addComment = async (req, res) => {
     let { licensePlate, username, message } = req.body;
     try {

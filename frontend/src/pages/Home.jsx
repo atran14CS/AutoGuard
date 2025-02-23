@@ -1,17 +1,16 @@
 import './Home.css';
 import Searchbar from '../componets/Searchbar';
-import Hero from '../componets/Hero'
-// import NewInfo from '../componets/NewInfo';
+// import Hero from '../componets/Hero'
+import NewInfo from '../componets/NewInfo';
 
 const Home = () => {
   return (
     <div>
       <h1>AutoGuard</h1>
-      {/* <button>Upload</button>
-      <button>Home</button> */}
+      <h2>Theft stops here</h2>
       <Searchbar />
-      <Hero />
-      {/* <NewInfo /> */}
+      {/* <Hero /> */}
+      <NewInfo />
     </div>
   )
 }

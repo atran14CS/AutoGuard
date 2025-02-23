@@ -42,7 +42,7 @@ const Searchbar = () => {
   return (
     <div className="searchbar-wrapper">
       <div className="searchbar-container">
-        <h2>Find Stolen Veichle</h2>
+        <h2>Find Stolen Veichles</h2>
         <select name="car-make" id="car-make" onChange={(e) => setCarMake(e.target.value)}>
           <option value="default">Make</option>
           <optgroup label="Car Makes">
