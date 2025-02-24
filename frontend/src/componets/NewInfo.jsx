@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@chakra-ui/react';
 import axios from 'axios';
 
-const MyComponent = () => {
+const NewInfo = () => {
     const [stolenCars, setStolenCars] = useState([]);
     const [offset, setOffset] = useState(0);
-    const [limit, setLimit] = useState(10);
     const [loading, setLoading] = useState(false);
 
     const fetchStolenCars = async () => {
+      console.log("here");
         if (!loading) {
             setLoading(true);
             try {
-                const response = await axios.get(`http://localhost:5001/stolenCar/getStolenCars?offset=${offset}&limit=${limit}`);
-                console.log("API Response:", response); // Log the entire response
-                setStolenCars(response.data); // Update this based on the actual structure
+                const response = await axios.get(`http://localhost:5001/api/stolenCar/getStolenCars`);
+                setStolenCars(response.data);
+                console.log("API Response:", response);
             } catch (error) {
                 console.error('Error fetching stolen cars:', error);
             } finally {
@@ -23,23 +23,30 @@ const MyComponent = () => {
         }
     };
 
-    console.log("Stolen Cars:", stolenCars); // Log the stolenCars state
+    useEffect(() => {
+      fetchStolenCars();
+  }, []);
+
 
     return (
         <div>
+          <h2>Recently Stolen Cars</h2>
+            <ul>
+                {stolenCars.length === 0 ? (
+                    <p>No stolen cars found.</p>
+                ) : (
+                    stolenCars.map((car) => (
+                        <li key={car._id}>
+                            {car.licensePlate} - {car.make} {car.model} ({car.state}, {car.city})
+                        </li>
+                    ))
+                )}
+            </ul>
             <Button onClick={fetchStolenCars} isLoading={loading}>
                 Fetch Stolen Cars
             </Button>
-            {/* Render your stolen cars data here */}
-            <ul>
-                {stolenCars.map((car, index) => (
-                    <li key={index}>
-                        {car.licensePlate} - {car.make} {car.model} ({car.year})
-                    </li>
-                ))}
-            </ul>
         </div>
     );
 };
 
-export default MyComponent;
+export default NewInfo;
