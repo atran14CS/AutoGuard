@@ -1,3 +1,4 @@
+/*list of 50 states*/
 export const STATES = [
     { name: "Alabama", abbr: "AL" },
     { name: "Alaska", abbr: "AK" },

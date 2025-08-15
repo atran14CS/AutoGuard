@@ -1,3 +1,5 @@
+/*List of common car makes */
+
 export const COMMON_MAKES = [
     "Toyota", "Honda", "Ford", "Chevrolet", "Nissan", "Hyundai",
     "Jeep", "Subaru", "Kia", "Volkswagen", "Dodge", "Mercedes-Benz",
