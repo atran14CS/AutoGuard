@@ -8,7 +8,7 @@ const NewInfo = () => {
     const [loading, setLoading] = useState(false);
 
     const fetchStolenCars = async () => {
-      console.log("here");
+        console.log("here");
         if (!loading) {
             setLoading(true);
             try {
@@ -25,8 +25,7 @@ const NewInfo = () => {
 
     useEffect(() => {
       fetchStolenCars();
-  }, []);
-
+    }, []);
 
     return (
         <div>

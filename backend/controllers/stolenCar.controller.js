@@ -34,6 +34,7 @@ export const addStolenCar = async (req, res) => {
     }
 }
 
+/*Fetch the stolen cars with limits */
 export const getStolenCars = async (req, res) => {
     try {
         const offset = parseInt(req.query.offset) || 0;
@@ -48,6 +49,18 @@ export const getStolenCars = async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 };
+
+
+// export const getStolenCars = async (req, res) => {
+//   try {
+//     const stolenCars = await StolenCar.find(); // no skip/limit
+//     console.log("Fetched cars:", stolenCars);
+//     res.status(200).json(stolenCars);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send("Internal Server Error");
+//   }
+// };
 
 export const getStolenCarByLicensePlate = async (req, res) => {
 let licensePlate = req.params.licensePlate;
