@@ -6,7 +6,7 @@
     background-color: #e6e3e3;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(11, 11, 11, 0.1);
-    height: 65vh;
+    height: 85vh;
   }
   
   .searchbar-container {
@@ -62,4 +62,8 @@
     max-width: 100%;
     height: auto;
     border-radius: 8px;
+  }
+
+  .report-button {
+    display: flex;
   }

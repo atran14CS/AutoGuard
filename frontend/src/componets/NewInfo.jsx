@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import './NewInfo.css';
 
 
 const NewInfo = () => {
@@ -33,8 +34,9 @@ const NewInfo = () => {
 
   return (
     <div>
-      <h2>Recently Stolen Cars</h2>
-      <Table size="sm" variant="simple">
+      <div className="stolen-cars-section">
+         <h2 className="stolen-header">Recently Stolen Cars</h2>
+      <Table size="sm" variant="simple" className='stolen-table'>
         <Thead>
           <Tr>
             <Th>Make</Th>
@@ -58,7 +60,7 @@ const NewInfo = () => {
           ))}
         </Tbody>
       </Table>
-
+      </div>
       <Button onClick={() => navigate("/stolencar")}>View More Stolen Cars</Button>
     </div>
   );

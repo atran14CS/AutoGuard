@@ -86,8 +86,10 @@ const Searchbar = () => {
         <div className="search-buttons">
           <Button colorScheme="red">Search</Button>
           <p>or</p>
-          <input type="text" placeholder="LICENSE PLATE #" onChange={(e) => setLicensePlate(e.target.value)} />
-          <Button colorScheme="red">Search</Button>
+            <input type="text" placeholder="LICENSE PLATE #" onChange={(e) => setLicensePlate(e.target.value)} />
+            <Button colorScheme="red">Search</Button>
+            <p>Report a Stolen Veichle</p>
+            <Button colorScheme="red">Report</Button>
         </div>
       </div>
       <div className="image-container">
