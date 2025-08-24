@@ -5,6 +5,7 @@ import { STATES } from "../../../backend/models/states";
 import { Button } from "@chakra-ui/react";
 import './Searchbar.css';
 import heropic from '../photos/heropic.jpeg';
+import { useNavigate } from "react-router-dom";
 
 
 /**
@@ -19,6 +20,9 @@ const Searchbar = () => {
   const [selectedModel, setSelectedModel] = useState("");
   const [state, setState] = useState("");
   const [licensePlate, setLicensePlate] = useState("");
+
+  // instantiate navigate function
+  const navigate = useNavigate();
 
   /**
    * Every time a car make other than the default is selected, fetch the models for that make
@@ -89,7 +93,7 @@ const Searchbar = () => {
             <input type="text" placeholder="LICENSE PLATE #" onChange={(e) => setLicensePlate(e.target.value)} />
             <Button colorScheme="red">Search</Button>
             <p>Report a Stolen Veichle</p>
-            <Button colorScheme="red">Report</Button>
+            <Button colorScheme="red" onClick={() => navigate('/reportStolenCar')}>Report</Button>
         </div>
       </div>
       <div className="image-container">
