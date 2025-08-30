@@ -67,8 +67,8 @@ const Searchbar = () => {
 
         <SelectInput
           label="Car Years"
-          options={Array.from({ length: 80 }, (_, i) => {
-            const year = 2023 - i;
+          options={Array.from({ length: 50 }, (_, i) => {
+            const year = 2025 - i;
             return { label: year, value: year };
           })}
           value={carYear}
@@ -92,7 +92,7 @@ const Searchbar = () => {
             <p>Report a Stolen Veichle</p>
             <Button colorScheme="red" onClick={() => navigate('/reportStolenCar')}>Report</Button>
         </div>
-        
+
       </div>
       <div className="image-container">
         <img src={heropic} alt="car theft image" id='hero-pic'/>
