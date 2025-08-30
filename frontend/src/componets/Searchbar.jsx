@@ -6,6 +6,7 @@ import { Button } from "@chakra-ui/react";
 import './Searchbar.css';
 import heropic from '../photos/heropic.jpeg';
 import { useNavigate } from "react-router-dom";
+import SelectInput from "./SelectInput";
 
 
 /**
@@ -47,46 +48,42 @@ const Searchbar = () => {
     <div className="searchbar-wrapper">
       <div className="searchbar-container">
         <h2>Find Stolen Veichles</h2>
-        <select name="car-make" id="car-make" onChange={(e) => setCarMake(e.target.value)}>
-          <option value="default">Make</option>
-          <optgroup label="Car Makes">
-            {COMMON_MAKES.map((make, index) => (
-              <option key={index} value={make}>
-                {make}
-              </option>
-            ))}
-          </optgroup>
-        </select>
-        <select name="car-model" id="car-model" onChange={(e) => setSelectedModel(e.target.value)}>
-          <option value="default">Model</option>
-          <optgroup label="Car Models">
-            {models.map((model, index) => (
-              <option key={index} value={model.Model_Name}>
-                {model.Model_Name}
-              </option>
-            ))}
-          </optgroup>
-        </select>
-        <select name="car-year" id="car-year" onChange={(e) => setCarYear(e.target.value)}>
-          <option value="default">Year</option>
-          <optgroup label="Car Years">
-            {Array.from({ length: 80 }, (_, i) => 2023 - i).map((year, index) => (
-              <option key={index} value={year}>
-                {year}
-              </option>
-            ))}
-          </optgroup>
-        </select>
-        <select name="state" id="state" onChange={(e) => setState(e.target.value)}>
-          <option value="default">State</option>
-          <optgroup label="States">
-            {STATES.map((state, index) => (
-              <option key={index} value={state.abbr}>
-                {state.abbr}
-              </option>
-            ))}
-          </optgroup>
-        </select>
+
+        <SelectInput
+          label="Car Makes"
+          options={COMMON_MAKES}
+          value={carMake}
+          onChange={setCarMake}
+          defaultText="Make"
+        />
+
+        <SelectInput
+          label="Car Models"
+          options={models.map((m) => ({ label: m.Model_Name, value: m.Model_Name }))}
+          value={selectedModel}
+          onChange={setSelectedModel}
+          defaultText="Model"
+        />
+
+        <SelectInput
+          label="Car Years"
+          options={Array.from({ length: 80 }, (_, i) => {
+            const year = 2023 - i;
+            return { label: year, value: year };
+          })}
+          value={carYear}
+          onChange={setCarYear}
+          defaultText="Year"
+        />
+
+        <SelectInput
+          label="States"
+          options={STATES.map((s) => ({ label: s.abbr, value: s.abbr }))}
+          value={state}
+          onChange={setState}
+          defaultText="State"
+        />
+
         <div className="search-buttons">
           <Button colorScheme="red">Search</Button>
           <p>or</p>
@@ -95,6 +92,7 @@ const Searchbar = () => {
             <p>Report a Stolen Veichle</p>
             <Button colorScheme="red" onClick={() => navigate('/reportStolenCar')}>Report</Button>
         </div>
+        
       </div>
       <div className="image-container">
         <img src={heropic} alt="car theft image" id='hero-pic'/>
